@@ -3,16 +3,25 @@
 /*
 This shader is a simple example showing you how to write your first URP toon lit shader with "minimum" shader code.
 You can use this shader as a starting point, add/edit code to develop your own custom toon lit shader for URP.
+该着色器将用“最少”的代码帮助你实现一个 URP Toon Lit Shader。
+你可以基于该着色器进行修改以创建自己的 URP Toon Lit Shader。
 
 *Usually, just by editing "SimpleURPToonLitOutlineExample_LightingEquation.hlsl" alone can control most of the visual result.
+*一般来说，修改 "SimpleURPToonLitOutlineExample_LightingEquation.hlsl" 文件就能控制绝大部分视觉效果。
 
 This shader includes 4 passes:
 0.SurfaceColor pass (this pass will always render to the color buffer _CameraColorTexture)
 1.Outline pass (this pass will always render to the color buffer _CameraColorTexture)
 2.ShadowCaster pass (only for URP's shadow mapping, this pass won't render at all if your project don't use shadow mapping)
 3.DepthOnly pass (only for URP's depth texture _CameraDepthTexture's rendering, this pass won't render at all if your project don't use depth texture)
+这个着色器包含四个 Pass，分别是：
+0.SurfaceColor pass 表面颜色（渲染缓存目标始终是 _CameraColoeTexture）
+1.Outline pass 描边（渲染缓存目标始终是 _CameraColoeTexture）
+2.ShadowCaster pass 阴影（仅在项目开启 Shadow Mapping 时被渲染）
+3.DepthOnly pass 深度（仅在项目使用带有深度的材质时被渲染）
 
 *because most of the time, you use a toon lit shader for characters, so all lightmap & instancing related code are removed for simplicity.
+*大多数情况仅在角色上应用 Toon Lit Shader，故为简化而移除了光照与实例相关代码。
 
 *In this shader, we choose static uniform branching over "shader_feature & multi_compile" for our togglable feature like "_UseEmission", because:
     - we want to avoid this shader's build time takes too long (2^n)
@@ -21,6 +30,7 @@ This shader includes 4 passes:
     - we want to avoid shader size becomes too large easily (2^n)
     - we want to avoid breaking SRP batcher's batching because it is batched per shader variant, not per shader
     - all modern GPU(include newer mobile devices) can handle static uniform branching with "almost" no performance cost
+*
 */
 Shader "SimpleURPToonLitExample(With Outline)"
 {
